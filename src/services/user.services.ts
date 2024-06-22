@@ -1,9 +1,13 @@
 import { User } from "../types/User";
 import { UserModel } from "../models/user.model";
+import { createHash } from "../utils/bcrypt";
 
-export const create = async (user: User): Promise<User | null> => {
+export const register = async (user: User): Promise<User | null> => {
   try {
-    return await UserModel.create(user);
+    return await UserModel.create({
+      ...user,
+      password: createHash(user?.password)
+    });
   } catch (error: unknown) {
     throw new Error((error as Error).message);
   }

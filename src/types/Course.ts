@@ -7,5 +7,6 @@ export interface Course {
     image: string;
     daysOfClases: string[];
     hoursOfClases: string[];
+    inscripts: any[];
     active: boolean;
 }

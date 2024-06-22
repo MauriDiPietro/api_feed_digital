@@ -10,6 +10,15 @@ const CourseSchema = new Schema<Course>({
   image: { type: String },
   daysOfClases: { type: [String] },
   hoursOfClases: { type: [String] },
+  inscripts:[
+    {
+      _id: false,
+      student: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+      }
+    }
+  ],
   active: { type: Boolean },
 });
 

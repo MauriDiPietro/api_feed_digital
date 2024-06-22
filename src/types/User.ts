@@ -1,6 +1,7 @@
 enum UserType {
-    Lector = 'LECTOR',
-    Redactor = 'REDACTOR'
+    Student = 'STUDENT',
+    Teacher = 'TEACHER',
+    Admin = 'ADMIN',
 };
 
 export interface User {

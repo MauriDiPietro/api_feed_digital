@@ -3,9 +3,9 @@ import * as service from "../services/user.services";
 import { HttpResponse } from "../utils/http.response";
 const httpResponse = new HttpResponse();
 
-export const create = async (req: Request, res: Response, next: NextFunction) => {
+export const register = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const newUser = await service.create(req.body);
+        const newUser = await service.register(req.body);
         if (!newUser) return httpResponse.NotFound(res, "Validation error!");
         else return httpResponse.Ok(res, newUser);
     } catch (error: unknown) {
