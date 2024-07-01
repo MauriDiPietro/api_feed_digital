@@ -2,7 +2,7 @@ import config from "./config";
 import { connect } from "mongoose";
 import MongoStore from 'connect-mongo';
 
-let connectionString = config.MONGO_LOCAL_URL;
+let connectionString: string | undefined = '';
 export const dbConnection = async (): Promise<void> => {
   switch (config.ENV) {
     case "dev":
@@ -14,12 +14,13 @@ export const dbConnection = async (): Promise<void> => {
       connectionString = config.MONGO_LOCAL_URL;
       break;
   }
+  console.log(`ENVIRONMENT DB => ${config.ENV}`)
   await connect(connectionString as string);
 };
 
 export const storeConfig = {
   store: MongoStore.create({
-      mongoUrl: connectionString,
+      mongoUrl: config.MONGO_ATLAS_URL_PROD || 'mongodb://127.0.0.1:27017/feed_digital',
       crypto: { secret: config.SECRET_KEY || '' },
       ttl: 180,
   }),

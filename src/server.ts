@@ -7,6 +7,7 @@ import { dbConnection, storeConfig } from './config/db.connection';
 import { errorHandler } from './middlewares/error.handler';
 import apiRouter from './routes/index';
 import 'dotenv/config'
+import config from './config/config';
 
 const app = express();
 
@@ -24,10 +25,11 @@ app.use(passport.session());
 
 app.use('/api', apiRouter);
 
-app.use(errorHandler);
+app.use(errorHandler); 
 
 app.listen(PORT, ()=>{
     console.log(`Server OK on port: ${PORT}`);
+    console.log(`ENVIRONMENT => ${config.ENV}`)
 })
 
 
