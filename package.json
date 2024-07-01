@@ -2,7 +2,7 @@
   "name": "api_feed_digital",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/server.js",
+  "main": "./dist/src/server.js",
   "scripts": {
     "build": "tsc",
     "start": "node .",
