@@ -1,31 +1,33 @@
 import config from "./config";
 import { connect } from "mongoose";
-import MongoStore from 'connect-mongo';
+import MongoStore from "connect-mongo";
+import "dotenv/config";
 
-let connectionString: string | undefined = '';
 export const dbConnection = async (): Promise<void> => {
-  switch (config.ENV) {
-    case "dev":
-      connectionString = config.MONGO_ATLAS_URL_TEST;
-      break;
-    case "prod":
-      connectionString = config.MONGO_ATLAS_URL_PROD;
-    default:
-      connectionString = config.MONGO_LOCAL_URL;
-      break;
+  if (process.env.ENV === "dev") {
+    await connect(process.env.MONGO_ATLAS_URL_TEST as string);
   }
-  console.log(`ENVIRONMENT DB => ${config.ENV}`)
-  await connect(connectionString as string);
+  if (process.env.ENV === "prod") {
+    await connect(process.env.MONGO_ATLAS_URL_PROD as string);
+  }
+
+  if (process.env.ENV === "local") {
+    await connect(process.env.MONGO_LOCAL_URL as string);
+  }
+
+  console.log(`ENVIRONMENT DB => ${config.ENV}`);
 };
 
 export const storeConfig = {
   store: MongoStore.create({
-      mongoUrl: config.MONGO_ATLAS_URL_PROD || "mongodb+srv://admin:admin@cluster0.xibok.mongodb.net/feed_digital_test?retryWrites=true&w=majority&appName=Cluster0",
-      crypto: { secret: config.SECRET_KEY || '' },
-      ttl: 180,
+    mongoUrl:
+      process.env.MONGO_ATLAS_URL_PROD ||
+      "mongodb+srv://admin:admin@cluster0.xibok.mongodb.net/feed_digital_test?retryWrites=true&w=majority&appName=Cluster0",
+    crypto: { secret: process.env.SECRET_KEY || "" },
+    ttl: 180,
   }),
-  secret: config.SECRET_KEY || '',
+  secret: process.env.SECRET_KEY || "",
   resave: true,
   saveUninitialized: true,
-  cookie: { maxAge: 180000 }
+  cookie: { maxAge: 180000 },
 };

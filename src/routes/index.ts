@@ -6,5 +6,6 @@ import userRouter from './user.router';
 
 router.use('/courses', courseRouter);
 router.use('/users', userRouter);
+router.get('/', (req, res)=>res.send('Server ok'))
 
 export default router;
