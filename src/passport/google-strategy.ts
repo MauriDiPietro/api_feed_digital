@@ -1,8 +1,8 @@
-import * as services from '../services/user.services.js';
+import * as services from '../services/user.services';
 import { Strategy as googleStrategy } from 'passport-google-oauth20';
 import passport from 'passport';
 import 'dotenv/config';
-import { UserType } from '../types/User.js';
+import { UserType } from '../types/User';
 
 const strategyConfig = {
     clientID: process.env.CLIENT_ID_GOOGLE || '',
@@ -18,7 +18,7 @@ const registerOrLogin = async(accessToken: any, refreshToken: any, profile: any,
         const email = profile._json.email ?? '';
         const firstname = profile._json.given_name ?? '';
         const lastname = profile._json.family_name ?? '';
-        const username = profile._json.username ?? '';
+        const username = email ? email.split("@")[0] : firstname;
         const user = await services.getByEmail(email);
         if(user) return done(null, user);
         const newUser = await services.register({
