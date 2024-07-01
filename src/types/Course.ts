@@ -1,12 +1,18 @@
 export interface Course {
-    name: string;
+  name: string;
+  description: string;
+  code: string;
+  startDate: {
+    date: string;
     description: string;
-    code: string;
-    startDate: string;
-    endDate: string;
-    image: string;
-    daysOfClases: string[];
-    hoursOfClases: string[];
-    inscripts: any[];
-    active: boolean;
+  };
+  endDate: {
+    date: string;
+    description: string;
+  };
+  image: string;
+  daysOfClases: string[];
+  hoursOfClases: string[];
+  inscripts: any[];
+  active: boolean;
 }

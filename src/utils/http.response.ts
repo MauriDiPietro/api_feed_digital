@@ -48,6 +48,5 @@ export class HttpResponse {
             error: data
         });
     };
-};
+}; 
 
-//! --> middlewares/error.hanlder.ts

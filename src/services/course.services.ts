@@ -48,6 +48,28 @@ export const addStudentToCourse = async (
   }
 };
 
+/**
+ * Una vez que se realizó el pago de un curso, se actualiza la propiedad pay a true,
+ * para tener el control sobre esa propiedad y darle acceso al usuario a éste curso en particular
+ * @param courseId 
+ * @param studentId 
+ * @returns Course
+ */
+export const payCourseOk = async (
+  courseId: string,
+  studentId: string
+) => {
+  try {
+    return await CourseModel.findOneAndUpdate(
+      { _id: courseId, 'inscripts.student': studentId },
+      { $set: { 'inscripts.$.pay': true } },
+      { new: true }
+     );
+  } catch (error: unknown) {
+    throw new Error((error as Error).message);
+  }
+};
+
 export const getAll = async (): Promise<Course[] | []> => {
   try {
     return await CourseModel.find({});

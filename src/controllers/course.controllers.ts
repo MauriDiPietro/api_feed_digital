@@ -37,6 +37,25 @@ export const addStudentToCourse = async (
   }
 };
 
+export const payCourseOk = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { courseId } = req.params;
+      const { studentId } = req.params;
+      const confirmPay = await service.payCourseOk(
+        courseId,
+        studentId
+      );
+      if (!confirmPay) return httpResponse.NotFound(res, "Error confimation pay of student");
+      return httpResponse.Ok(res, confirmPay);
+    } catch (error: unknown) {
+      next((error as Error).message);
+    }
+  };
+
 export const getAll = async (
   _req: Request,
   res: Response,
