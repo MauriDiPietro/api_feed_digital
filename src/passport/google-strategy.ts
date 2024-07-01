@@ -40,7 +40,7 @@ const registerOrLogin = async(accessToken: any, refreshToken: any, profile: any,
 passport.use('google', new googleStrategy(strategyConfig, registerOrLogin));
 
 passport.serializeUser((user: any, done)=>{
-    done(null, user._id)
+    done(null, user.id)
 });
 
 passport.deserializeUser(async(id: string, done)=>{
