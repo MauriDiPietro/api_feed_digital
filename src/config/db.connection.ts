@@ -22,7 +22,7 @@ export const storeConfig = {
   store: MongoStore.create({
     mongoUrl:
       process.env.MONGO_ATLAS_URL_PROD ||
-      "mongodb+srv://admin:admin@cluster0.xibok.mongodb.net/feed_digital_test?retryWrites=true&w=majority&appName=Cluster0",
+      "",
     crypto: { secret: process.env.SECRET_KEY || "" },
     ttl: 180,
   }),
