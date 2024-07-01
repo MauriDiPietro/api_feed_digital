@@ -5,11 +5,11 @@ import 'dotenv/config';
 import { UserType } from '../types/User.js';
 
 const strategyConfig = {
-    clientID: process.env.CLIENT_ID_GOOGLE,
-    clientSecret: process.env.CLIENT_SECRET_GOOGLE,
-    callbackURL: process.env.CALLBACK_URL_GOOGLE,
+    clientID: process.env.CLIENT_ID_GOOGLE || '',
+    clientSecret: process.env.CLIENT_SECRET_GOOGLE || '',
+    callbackURL: process.env.CALLBACK_URL_GOOGLE || '',
     scope: ['profile', 'email'],
-    state: true
+    state: true,
 };
 
 const registerOrLogin = async(accessToken: any, refreshToken: any, profile: any, done: any) => {
