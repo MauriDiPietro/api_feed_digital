@@ -20,7 +20,7 @@ export const dbConnection = async (): Promise<void> => {
 
 export const storeConfig = {
   store: MongoStore.create({
-      mongoUrl: config.MONGO_ATLAS_URL_PROD || 'mongodb://127.0.0.1:27017/feed_digital',
+      mongoUrl: config.MONGO_ATLAS_URL_PROD || "mongodb+srv://admin:admin@cluster0.xibok.mongodb.net/feed_digital_test?retryWrites=true&w=majority&appName=Cluster0",
       crypto: { secret: config.SECRET_KEY || '' },
       ttl: 180,
   }),
